@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class Connect 
 {
-    private String dbUrl = "db\\dblms.db";
+    private static String dbUrl = "E:\\myCraft\\Java\\LoanMS\\src\\connect\\net\\sqlite\\db\\dblms.db";
     // public void connect() throws SQLException{
     //     String dbUrl = "E:\\myCraft\\Java\\test\\test\\src\\db\\database.db";
 
@@ -26,12 +26,12 @@ public class Connect
     //     System.out.println("Connected Successfully");
     // }
 
-    private Connection connect() {
+    private static Connection connect() {
         // SQLite connection string
         
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(dbUrl);
+            conn = DriverManager.getConnection("jdbc:sqlite:/" + dbUrl);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -48,7 +48,7 @@ public class Connect
         }
         sql += " FROM " + tableName;
 
-        try (Connection conn = this.connect();
+        try (Connection conn = connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql))
         {
@@ -65,6 +65,11 @@ public class Connect
         return null;
     }
     
+    // public static void main(String[] args) 
+    // {
+    //     connect();
+    //     System.out.println("Successfully");
+    // }
     
 
 }

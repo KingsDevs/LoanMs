@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Connect",
+            "request": "launch",
+            "mainClass": "connect.net.sqlite.Connect",
+            "projectName": "LoanMS_c0dc68ee"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
