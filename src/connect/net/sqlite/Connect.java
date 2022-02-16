@@ -28,7 +28,7 @@ public class Connect
     //     System.out.println("Connected Successfully");
     // }
 
-    private static Connection connect() {
+    public static Connection connect() {
         // SQLite connection string
         
         Connection conn = null;
@@ -67,13 +67,13 @@ public class Connect
     //     System.out.println("Successfully");
     // }
     
-    public User getData() throws SQLException
+    public User getData(Statement stmt) throws SQLException
     {
         String username;
         String password;
 
-        Connection conn = connect();
-        Statement stmt  = conn.createStatement();
+        // Connection conn = connect();
+        // Statement stmt  = conn.createStatement();
         ResultSet rs    = stmt.executeQuery("SELECT * FROM user LIMIT 1");
 
         username = rs.getString("username");  

@@ -1,6 +1,8 @@
 package controllers;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import connect.net.sqlite.Connect;
 import javafx.event.ActionEvent;
@@ -27,18 +29,33 @@ public class LoginController
     @FXML
     private Label validationText;
 
+    private Statement userStmt;
+    public LoginController()
+    {
+
+        Connection conn = Connect.connect();
+        try {
+            userStmt  = conn.createStatement();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void loginBtnClicked(ActionEvent event) throws SQLException 
     {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if (username != "" && password != "") 
+        if (!(username.isEmpty() && password.isEmpty())) 
         {
-            Connect connect = new Connect();
-            User user = connect.getData();
+            loginBtn.setDisable(true);            
 
-            if (user.getUsername() == username && user.getPassword() == password) 
+            Connect connect = new Connect();
+            User user = connect.getData(userStmt);
+
+            if (username.equals(user.getUsername()) && password.equals(user.getPassword())) 
             {
                 validationText.setTextFill(Color.GREEN);
                 validationText.setText("You are login!");
@@ -47,12 +64,10 @@ public class LoginController
             {
                 validationText.setTextFill(Color.RED);
                 validationText.setText("Your username or password is not correct!");
+
+                loginBtn.setDisable(false);
             }
 
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(user.getUsername());
-            System.out.println(user.getPassword());
         }
         else
         {
