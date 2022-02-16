@@ -3,19 +3,18 @@ package objects;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import connect.net.sqlite.Connect;
+
 public class User 
 {
     private String username;
     private String password;
     
 
-    public void setFromDb(ResultSet rs) throws SQLException
+    public User(String username, String password)
     {
-        while (rs.next()) 
-        {
-            username = rs.getString("username");
-            password = rs.getString("password");
-        }
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername()

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import objects.User;
+
 public class Connect 
 {
     private static String dbUrl = "E:\\myCraft\\Java\\LoanMS\\src\\connect\\net\\sqlite\\db\\dblms.db";
@@ -38,22 +40,16 @@ public class Connect
         return conn;
     }
 
-    public ResultSet select(String tableName, String[] columns)
+    public ResultSet select(String tableName, String columns)
     {
 
-        String sql = "SELECT ";
-        for (String column : columns) 
-        {
-            sql += (column + ", ");
-        }
-        sql += " FROM " + tableName;
-
+        String sql = "SELECT " + columns + " FROM " + tableName;
+        
         try (Connection conn = connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql))
         {
             
-
             return rs;
         } 
         catch (SQLException e) 
@@ -71,5 +67,21 @@ public class Connect
     //     System.out.println("Successfully");
     // }
     
+    public User getData() throws SQLException
+    {
+        String username;
+        String password;
+
+        Connection conn = connect();
+        Statement stmt  = conn.createStatement();
+        ResultSet rs    = stmt.executeQuery("SELECT * FROM user LIMIT 1");
+
+        username = rs.getString("username");  
+        password = rs.getString("password");  
+
+        User user = new User(username, password);
+
+        return user;
+    }
 
 }
