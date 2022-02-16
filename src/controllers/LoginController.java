@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -7,11 +8,16 @@ import java.sql.Statement;
 import connect.net.sqlite.Connect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import objects.User;
 
 public class LoginController 
@@ -30,6 +36,9 @@ public class LoginController
     private Label validationText;
 
     private Statement userStmt;
+
+
+
     public LoginController()
     {
 
@@ -43,7 +52,7 @@ public class LoginController
     }
 
     @FXML
-    void loginBtnClicked(ActionEvent event) throws SQLException 
+    void loginBtnClicked(ActionEvent event) throws SQLException, IOException 
     {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -53,12 +62,20 @@ public class LoginController
             loginBtn.setDisable(true);            
 
             Connect connect = new Connect();
-            User user = connect.getData(userStmt);
+            User user = connect.getUserData(userStmt);
 
             if (username.equals(user.getUsername()) && password.equals(user.getPassword())) 
             {
                 validationText.setTextFill(Color.GREEN);
                 validationText.setText("You are login!");
+
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+                Scene scene = loginBtn.getScene();
+                Window window = scene.getWindow();
+                Stage stage = (Stage)window;
+
+                stage.setScene(new Scene(root));
+                stage.show();
             }
             else
             {

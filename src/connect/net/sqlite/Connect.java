@@ -67,7 +67,7 @@ public class Connect
     //     System.out.println("Successfully");
     // }
     
-    public User getData(Statement stmt) throws SQLException
+    public User getUserData(Statement stmt) throws SQLException
     {
         String username;
         String password;
