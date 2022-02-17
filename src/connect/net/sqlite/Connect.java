@@ -12,6 +12,7 @@ import objects.User;
 public class Connect 
 {
  
+    //private static String dbUrl = "db/dblms.db";
     private static String dbUrl = "E:\\myCraft\\Java\\LoanMS\\src\\connect\\net\\sqlite\\db\\dblms.db";
     // public void connect() throws SQLException{
     //     String dbUrl = "E:\\myCraft\\Java\\test\\test\\src\\db\\database.db";
