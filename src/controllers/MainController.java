@@ -38,8 +38,10 @@ public class MainController
     }
 
     @FXML
-    void addMemberAction(ActionEvent event) 
+    void addMemberAction(ActionEvent event) throws IOException 
     {
+        Pane setPane = getPane("addMembers");
+        mainPane.setCenter(setPane);
         
     }
 

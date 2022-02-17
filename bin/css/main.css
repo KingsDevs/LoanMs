@@ -35,3 +35,7 @@
     -fx-background-color: rgb(241, 241, 241);
     -fx-text-fill : "Black";
 }
+
+.tabHbox{
+    -fx-background-color: rgb(140, 91, 204);
+}

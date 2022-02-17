@@ -5,7 +5,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -67,6 +70,32 @@
                </children>
             </VBox>
          </left>
+         <center>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="689.0" BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="129.0" minHeight="2.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="338.0" minHeight="10.0" prefHeight="338.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="tabHbox">
+                     <children>
+                        <Label text="Add  Members">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="45.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </GridPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
