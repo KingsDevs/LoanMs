@@ -81,7 +81,13 @@ public class LoginController
                 validationText.setTextFill(Color.GREEN);
                 validationText.setText("You are login!");
 
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+                Parent root = loader.load();
+
+                MainController mainController = loader.getController();
+                mainController.setStatement(userStmt);
+                //Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+                
                 Scene scene = loginBtn.getScene();
                 Window window = scene.getWindow();
                 Stage stage = (Stage)window;
