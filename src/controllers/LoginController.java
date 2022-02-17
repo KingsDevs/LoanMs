@@ -86,6 +86,7 @@ public class LoginController
 
                 MainController mainController = loader.getController();
                 mainController.setStatement(userStmt);
+                mainController.setHome();
                 //Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
                 
                 Scene scene = loginBtn.getScene();

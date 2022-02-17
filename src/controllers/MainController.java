@@ -9,12 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public class MainController 
 {
     private Statement statement;
-    private Button currBtnActive = null;
 
     @FXML
     private Button addLoanBtn;
@@ -31,10 +29,22 @@ public class MainController
     @FXML
     private Button settingsBtn;
 
-    @FXML
-    void addLoanAction(ActionEvent event) 
+    // public MainController() throws IOException
+    // {
+    //     Pane setPane = getPane("home");
+    //     mainPane.setCenter(setPane);
+    // }
+    
+    public void setHome() throws IOException
     {
-        
+        homeAction(new ActionEvent());
+    }
+
+    @FXML
+    void addLoanAction(ActionEvent event) throws IOException 
+    {
+        Pane setPane = getPane("addLoan");
+        mainPane.setCenter(setPane);
     }
 
     @FXML
@@ -46,15 +56,17 @@ public class MainController
     }
 
     @FXML
-    void homeAction(ActionEvent event) 
+    void homeAction(ActionEvent event) throws IOException 
     {
-        
+        Pane setPane = getPane("home");
+        mainPane.setCenter(setPane);
     }
 
     @FXML
-    void settingsAction(ActionEvent event) 
+    void settingsAction(ActionEvent event) throws IOException 
     {
-        
+        Pane setPane = getPane("addMembers");
+        mainPane.setCenter(setPane);
     }
 
     
