@@ -11,8 +11,10 @@ public class App extends Application{
         
         
         Parent root = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
         primaryStage.setTitle("Loan Management System");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(scene);
         primaryStage.show();
           
     }

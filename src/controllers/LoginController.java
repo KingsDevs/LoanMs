@@ -74,7 +74,9 @@ public class LoginController
                 Window window = scene.getWindow();
                 Stage stage = (Stage)window;
 
-                stage.setScene(new Scene(root));
+                Scene mainScene = new Scene(root);
+                mainScene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
+                stage.setScene(mainScene);
                 stage.show();
             }
             else
