@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -49,6 +51,16 @@ public class LoginController
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void handle(KeyEvent keyEvent) throws SQLException, IOException 
+    {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) 
+        {
+           loginBtnClicked(new ActionEvent());
+        }
+        
     }
 
     @FXML
