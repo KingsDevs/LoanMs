@@ -1,9 +1,5 @@
 package objects;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import connect.net.sqlite.Connect;
 
 public class User 
 {
