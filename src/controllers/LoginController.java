@@ -44,9 +44,8 @@ public class LoginController
     public LoginController()
     {
 
-        Connection conn = Connect.getConnection();
         try {
-            userStmt  = conn.createStatement();
+            userStmt  = Connect.getStatement();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -85,7 +84,7 @@ public class LoginController
                 Parent root = loader.load();
 
                 MainController mainController = loader.getController();
-                mainController.setStatement(userStmt);
+                
                 mainController.setHome();
                 //Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
                 

@@ -12,7 +12,6 @@ import javafx.scene.layout.Pane;
 
 public class MainController 
 {
-    private Statement statement;
 
     @FXML
     private Button addLoanBtn;
@@ -67,13 +66,6 @@ public class MainController
     {
         Pane setPane = getPane("addMembers");
         mainPane.setCenter(setPane);
-    }
-
-    
-
-    public void setStatement(Statement stmnt)
-    {
-        statement = stmnt;
     }
 
     private Pane getPane(String paneName) throws IOException

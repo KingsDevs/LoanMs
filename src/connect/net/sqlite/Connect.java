@@ -15,6 +15,7 @@ public class Connect
     //private static String dbUrl = "db/dblms.db";
     private static String dbUrl = "E:\\myCraft\\Java\\LoanMS\\src\\connect\\net\\sqlite\\db\\dblms.db";
     private static Connection connection = null;
+    private static Statement statement = null;
     // public void connect() throws SQLException{
     //     String dbUrl = "E:\\myCraft\\Java\\test\\test\\src\\db\\database.db";
 
@@ -30,6 +31,16 @@ public class Connect
 
     //     System.out.println("Connected Successfully");
     // }
+
+    public static Statement getStatement() throws SQLException
+    {
+        if(statement == null)
+        {
+            statement = getConnection().createStatement();
+        }
+
+        return statement;
+    }
 
     public static Connection getConnection()
     {
