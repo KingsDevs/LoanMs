@@ -14,6 +14,7 @@ public class Connect
  
     //private static String dbUrl = "db/dblms.db";
     private static String dbUrl = "E:\\myCraft\\Java\\LoanMS\\src\\connect\\net\\sqlite\\db\\dblms.db";
+    private static Connection connection = null;
     // public void connect() throws SQLException{
     //     String dbUrl = "E:\\myCraft\\Java\\test\\test\\src\\db\\database.db";
 
@@ -30,7 +31,17 @@ public class Connect
     //     System.out.println("Connected Successfully");
     // }
 
-    public static Connection connect() {
+    public static Connection getConnection()
+    {
+        if (connection == null) 
+        {
+            connection = connect();    
+        }
+
+        return connection;
+    }
+
+    private static Connection connect() {
         // SQLite connection string
         
         Connection conn = null;
@@ -47,7 +58,7 @@ public class Connect
 
         String sql = "SELECT " + columns + " FROM " + tableName;
         
-        try (Connection conn = connect();
+        try (Connection conn = getConnection();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql))
         {

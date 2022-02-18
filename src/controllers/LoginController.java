@@ -44,7 +44,7 @@ public class LoginController
     public LoginController()
     {
 
-        Connection conn = Connect.connect();
+        Connection conn = Connect.getConnection();
         try {
             userStmt  = conn.createStatement();
         } catch (SQLException e) {
