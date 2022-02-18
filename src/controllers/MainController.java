@@ -49,7 +49,7 @@ public class MainController
     @FXML
     void addMemberAction(ActionEvent event) throws IOException 
     {
-        Pane setPane = getPane("addMembers");
+        Pane setPane = getPane("addMembersMain");
         mainPane.setCenter(setPane);
         
     }

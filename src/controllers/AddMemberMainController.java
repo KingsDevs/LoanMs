@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import objects.CoopMember;
 
 public class AddMemberMainController implements Initializable
@@ -80,7 +81,7 @@ public class AddMemberMainController implements Initializable
     @FXML
     void addMember(ActionEvent event) 
     {
-        
+        Stage addMemberStage = new Stage();
     }
 
 }

@@ -15,7 +15,7 @@
          <top>
             <HBox id="titleHbox" alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="843.0" stylesheets="@../css/main.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Loan Managment System" textFill="WHITE">
+                  <Label text="Loan Management System" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
