@@ -3,6 +3,7 @@ package connect.net.sqlite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ public class Connect
     private static String dbUrl = "E:\\myCraft\\Java\\LoanMS\\src\\connect\\net\\sqlite\\db\\dblms.db";
     private static Connection connection = null;
     private static Statement statement = null;
+    private static PreparedStatement preparedStatement = null;
     // public void connect() throws SQLException{
     //     String dbUrl = "E:\\myCraft\\Java\\test\\test\\src\\db\\database.db";
 
@@ -31,6 +33,12 @@ public class Connect
 
     //     System.out.println("Connected Successfully");
     // }
+
+    public static PreparedStatement getPreparedStatement(String sql) throws SQLException
+    {
+        preparedStatement = getConnection().prepareStatement(sql);
+        return preparedStatement;
+    }
 
     public static Statement getStatement() throws SQLException
     {

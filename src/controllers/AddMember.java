@@ -1,5 +1,7 @@
 package controllers;
 
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -8,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import objects.CoopMember;
 import tools.FormValidation;
 
 public class AddMember 
@@ -59,6 +62,8 @@ public class AddMember
     @FXML
     void addMember(ActionEvent event) 
     {
+        addMemberBtn.setDisable(true);
+
         String firstname = firstNameField.getText();
         String middlename = middleNameField.getText();
         String lastName = lastnameField.getText();
@@ -66,6 +71,14 @@ public class AddMember
         String position = positionField.getText();
 
         boolean isCleared = true;
+
+        firstNameValidation.setText("");
+        lastnameValidation.setText("");
+        middleNameValidation.setText("");
+        addressValidation.setText("");
+        positionValidation.setText("");
+        mainFormValidationLabel.setText("");
+
         if(firstname.isEmpty())
         {
             firstNameValidation.setText(FormValidation.emptyField("First Name"));
@@ -96,6 +109,17 @@ public class AddMember
             isCleared = false;
         }
 
+        try {
+            if (CoopMember.isExist(firstname, middlename, lastName)) 
+            {
+                mainFormValidationLabel.setText("Coop Member Already Exist!");
+                isCleared = false;
+            }
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+        }
+
         if (isCleared) 
         {
             System.out.println("Lesgaw");
@@ -104,6 +128,10 @@ public class AddMember
             Stage currStage = (Stage)currScene.getWindow();
 
             currStage.close();
+        }
+        else
+        {
+            addMemberBtn.setDisable(false);
         }
 
 

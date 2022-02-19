@@ -1,5 +1,6 @@
 package objects;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -54,5 +55,33 @@ public class CoopMember
     {
         ResultSet resultSet = Connect.getStatement().executeQuery("SELECT * FROM coop_members ORDER BY lastname");
         return resultSet;
+    }
+
+    public static boolean isExist(String firstname, String middlename, String lastname) throws SQLException
+    {
+        String sql = "SELECT firstname, middlename, lastname "
+                   + "FROM coop_members "
+                   + "WHERE firstname = ?"
+                   + " AND middlename = ?"
+                   + " AND lastname = ?";
+
+        PreparedStatement preparedStatement = Connect.getPreparedStatement(sql);
+        
+        preparedStatement.setString(1, firstname);
+        preparedStatement.setString(2, middlename);
+        preparedStatement.setString(3, lastname);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) 
+        {
+            //System.out.println(resultSet.getString("firstname"));
+            if(resultSet.getString("firstname") != null)
+            {
+                return true;
+            }    
+        }
+
+        return false;
     }
 }
