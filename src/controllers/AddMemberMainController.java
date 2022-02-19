@@ -46,6 +46,8 @@ public class AddMemberMainController implements Initializable
     @FXML
     private TableColumn<CoopMember, String> positionCol;
 
+    
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) 
     {
@@ -61,8 +63,42 @@ public class AddMemberMainController implements Initializable
         // } catch (SQLException e) {
         //     e.printStackTrace();
         // }
+        
+        updateTable();
+        
+    }
 
+    @FXML
+    void addMember(ActionEvent event) throws IOException 
+    {
+        Stage addMemberStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addMembers.fxml"));
+
+        // FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addMembers.fxml"));
+        // AddMember addMember = loader.getController();
+        // addMember.setAddMemberMainController(this);
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
+        addMemberStage.setTitle("Add Members");
+        addMemberStage.alwaysOnTopProperty();
+        addMemberStage.setScene(scene);
+        addMemberStage.centerOnScreen();
+        
+        Scene currScene = addMemberBtn.getScene();
+        Stage currStage = (Stage)currScene.getWindow();
+
+        addMemberStage.initOwner(currStage);
+        addMemberStage.initModality(Modality.WINDOW_MODAL);
+        
+        addMemberStage.show();
+
+    }
+
+    public void updateTable()
+    {
         ObservableList<CoopMember> data = memberTableView.getItems();
+        
         try (ResultSet resultSet = CoopMember.getMembers()) {
 
             while (resultSet.next()) 
@@ -82,26 +118,9 @@ public class AddMemberMainController implements Initializable
         memberTableView.setItems(data);
     }
 
-    @FXML
-    void addMember(ActionEvent event) throws IOException 
-    {
-        Stage addMemberStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addMembers.fxml"));
-
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
-        addMemberStage.setTitle("Add Members");
-        addMemberStage.alwaysOnTopProperty();
-        addMemberStage.setScene(scene);
-        addMemberStage.centerOnScreen();
-        
-        Scene currScene = addMemberBtn.getScene();
-        Stage currStage = (Stage)currScene.getWindow();
-
-        addMemberStage.initOwner(currStage);
-        addMemberStage.initModality(Modality.WINDOW_MODAL);
-        
-        addMemberStage.show();
-    }
-
+    // public void addMemberInData(CoopMember coopMember)
+    // {
+    //     data.add(coopMember);
+    //     memberTableView.setItems(data);
+    // }
 }

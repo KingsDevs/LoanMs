@@ -84,4 +84,24 @@ public class CoopMember
 
         return false;
     }
+
+    public void insertCoopMember()
+    {
+        String sql = "INSERT INTO coop_members(firstname, middlename, lastname, address, position) "
+                    +"VALUES(?,?,?,?,?)";
+        
+        try (PreparedStatement preparedStatement = Connect.getPreparedStatement(sql)) 
+        {
+            preparedStatement.setString(1, firstname);
+            preparedStatement.setString(2, middlename);
+            preparedStatement.setString(3, lastname);
+            preparedStatement.setString(4, address);
+            preparedStatement.setString(5, position);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+        }
+    }
 }

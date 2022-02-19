@@ -54,6 +54,9 @@ public class AddMember
 
     private AddMemberMainController addMemberMainController;
 
+    public AddMember()
+    {}
+
     public void setAddMemberMainController(AddMemberMainController addMemberMainController)
     {
         this.addMemberMainController = addMemberMainController;
@@ -123,6 +126,16 @@ public class AddMember
         if (isCleared) 
         {
             System.out.println("Lesgaw");
+
+            CoopMember coopMember = new CoopMember(
+                firstname,
+                middlename,
+                lastName,
+                position,
+                address
+            );
+
+            coopMember.insertCoopMember();
 
             Scene currScene = addMemberBtn.getScene();
             Stage currStage = (Stage)currScene.getWindow();
