@@ -86,8 +86,7 @@ public class AddMemberMainController implements Initializable
     void addMember(ActionEvent event) throws IOException 
     {
         Stage addMemberStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addMembers.fxml"));
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addMembers.fxml"));
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());

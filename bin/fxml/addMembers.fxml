@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="488.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddMember">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="381.0" prefWidth="515.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddMember">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="489.0" styleClass="tabHbox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -39,9 +39,9 @@
                <children>
                   <VBox prefHeight="75.0" prefWidth="245.0" spacing="5.0">
                      <children>
-                        <HBox fx:id="firstNameValidation" alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
+                        <HBox alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
                            <children>
-                              <Label textFill="RED" />
+                              <Label fx:id="firstNameValidation" textFill="RED" />
                            </children>
                         </HBox>
                         <Label text="First Name:" />
@@ -53,9 +53,9 @@
                   </VBox>
                   <VBox prefHeight="75.0" prefWidth="245.0" spacing="5.0">
                      <children>
-                        <HBox fx:id="middleNameValidation" alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
+                        <HBox alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
                            <children>
-                              <Label textFill="RED" />
+                              <Label fx:id="middleNameValidation" textFill="RED" />
                            </children>
                         </HBox>
                         <Label text="Middle Name:" />
@@ -67,9 +67,9 @@
                   </VBox>
                   <VBox prefHeight="75.0" prefWidth="245.0" spacing="5.0">
                      <children>
-                        <HBox fx:id="lastnameValidation" alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
+                        <HBox alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
                            <children>
-                              <Label textFill="RED" />
+                              <Label fx:id="lastnameValidation" textFill="RED" />
                            </children>
                         </HBox>
                         <Label text="Last Name: " />
@@ -88,9 +88,9 @@
                <children>
                   <VBox prefHeight="75.0" prefWidth="245.0" spacing="5.0">
                      <children>
-                        <HBox fx:id="addressValidation" alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
+                        <HBox alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
                            <children>
-                              <Label textFill="RED" />
+                              <Label fx:id="addressValidation" textFill="RED" />
                            </children>
                         </HBox>
                         <Label text="Address: " />
@@ -102,9 +102,9 @@
                   </VBox>
                   <VBox prefHeight="75.0" prefWidth="245.0" spacing="5.0">
                      <children>
-                        <HBox fx:id="positionValidation" alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
+                        <HBox alignment="CENTER" prefHeight="14.0" prefWidth="225.0">
                            <children>
-                              <Label textFill="RED" />
+                              <Label fx:id="positionValidation" textFill="RED" />
                            </children>
                         </HBox>
                         <Label text="Position:" />
