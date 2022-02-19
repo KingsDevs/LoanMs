@@ -32,6 +32,9 @@ public class AddMemberMainController implements Initializable
     private TableView<CoopMember> memberTableView;
 
     @FXML
+    private TableColumn<CoopMember, Integer> ageCol;
+
+    @FXML
     private TableColumn<CoopMember, String> addressCol;
 
     @FXML
@@ -56,6 +59,7 @@ public class AddMemberMainController implements Initializable
         lastNameCol.setCellValueFactory(new PropertyValueFactory<CoopMember, String>("lastname"));
         positionCol.setCellValueFactory(new PropertyValueFactory<CoopMember, String>("position"));
         addressCol.setCellValueFactory(new PropertyValueFactory<CoopMember, String>("address"));
+        ageCol.setCellValueFactory(new PropertyValueFactory<CoopMember, Integer>("age"));
 
         // try {
         //     ObservableList<CoopMember> observableList = FXCollections.observableList(CoopMember.getMembers());
@@ -71,27 +75,18 @@ public class AddMemberMainController implements Initializable
     @FXML
     void addMember(ActionEvent event) throws IOException 
     {
-        Stage addMemberStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addMembers.fxml"));
 
-        // FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addMembers.fxml"));
-        // AddMember addMember = loader.getController();
-        // addMember.setAddMemberMainController(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addMembers.fxml"));
+        Parent root = loader.load();
 
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
-        addMemberStage.setTitle("Add Members");
-        addMemberStage.alwaysOnTopProperty();
-        addMemberStage.setScene(scene);
-        addMemberStage.centerOnScreen();
+        Scene scene = addMemberBtn.getScene();
+        Window window = scene.getWindow();
+        Stage stage = (Stage)window;
         
-        Scene currScene = addMemberBtn.getScene();
-        Stage currStage = (Stage)currScene.getWindow();
-
-        addMemberStage.initOwner(currStage);
-        addMemberStage.initModality(Modality.WINDOW_MODAL);
-        
-        addMemberStage.show();
+        Scene addMemberScene = new Scene(root);
+        addMemberScene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
+        stage.setScene(addMemberScene);
+        stage.show();
 
     }
 
@@ -108,7 +103,9 @@ public class AddMemberMainController implements Initializable
                     resultSet.getString("middlename"), 
                     resultSet.getString("lastname"), 
                     resultSet.getString("position"), 
-                    resultSet.getString("address")));
+                    resultSet.getString("address"),
+                    resultSet.getInt("age")
+                    ));
             }
 
         } catch (SQLException e) {

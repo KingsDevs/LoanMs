@@ -1,19 +1,26 @@
 package controllers;
 
-import java.sql.SQLException;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import objects.CoopMember;
 import tools.FormValidation;
 
-public class AddMember 
+public class AddMember
 {
 
     @FXML
@@ -24,6 +31,12 @@ public class AddMember
 
     @FXML
     private TextField addressVield;
+
+    @FXML
+    private TextField ageField;
+
+    @FXML
+    private Label ageValidation;
 
     @FXML
     private TextField firstNameField;
@@ -52,18 +65,16 @@ public class AddMember
     @FXML
     private Label positionValidation;
 
-    private AddMemberMainController addMemberMainController;
+    // private TableView tableView;
 
-    public AddMember()
-    {}
+    // public void setTableView(TableView tableView)
+    // {
+    //     this.tableView = tableView;
+    // }
 
-    public void setAddMemberMainController(AddMemberMainController addMemberMainController)
-    {
-        this.addMemberMainController = addMemberMainController;
-    }
 
     @FXML
-    void addMember(ActionEvent event) 
+    void addMember(ActionEvent event) throws IOException 
     {
         addMemberBtn.setDisable(true);
 
@@ -72,6 +83,7 @@ public class AddMember
         String lastName = lastnameField.getText();
         String address = addressVield.getText();
         String position = positionField.getText();
+        String sAge = ageField.getText();
 
         boolean isCleared = true;
 
@@ -82,33 +94,39 @@ public class AddMember
         positionValidation.setText("");
         mainFormValidationLabel.setText("");
 
-        if(firstname.isEmpty())
+        if(firstname.isEmpty() || firstname.isBlank())
         {
             firstNameValidation.setText(FormValidation.emptyField("First Name"));
             isCleared = false;
         }
 
-        if(middlename.isEmpty())
+        if(middlename.isEmpty() || middlename.isBlank())
         {
             middleNameValidation.setText(FormValidation.emptyField("Middle Name"));
             isCleared = false;
         }
 
-        if(lastName.isEmpty())
+        if(lastName.isEmpty() || lastName.isBlank())
         {
             lastnameValidation.setText(FormValidation.emptyField("Last Name"));
             isCleared = false;
         }
 
-        if(address.isEmpty())
+        if(address.isEmpty() || address.isBlank())
         {
             addressValidation.setText(FormValidation.emptyField("Address"));
             isCleared = false;
         }
 
-        if(position.isEmpty())
+        if(position.isEmpty() || position.isBlank())
         {
             positionValidation.setText(FormValidation.emptyField("Position"));
+            isCleared = false;
+        }
+
+        if (sAge.isEmpty() || sAge.isBlank())
+        {
+            ageValidation.setText(FormValidation.emptyField("Age"));
             isCleared = false;
         }
 
@@ -125,22 +143,20 @@ public class AddMember
 
         if (isCleared) 
         {
-            System.out.println("Lesgaw");
+            // System.out.println("Lesgaw");
 
             CoopMember coopMember = new CoopMember(
                 firstname,
                 middlename,
                 lastName,
                 position,
-                address
+                address,
+                Integer.parseInt(sAge)
             );
 
             coopMember.insertCoopMember();
 
-            Scene currScene = addMemberBtn.getScene();
-            Stage currStage = (Stage)currScene.getWindow();
-
-            currStage.close();
+            cancel(new ActionEvent());
         }
         else
         {
@@ -148,6 +164,45 @@ public class AddMember
         }
 
 
+    }
+
+    @FXML
+    void onlyNumeric(InputMethodEvent event) 
+    {
+        // ageField.textProperty().addListener(new ChangeListener<String>(){
+
+        //     @Override
+        //     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) 
+        //     {
+        //         if(!newValue.matches("\\d*"))
+        //         {
+        //             ageField.setText(newValue.replaceAll("[^\\d]", ""));
+        //         }
+        //     }
+
+        // });
+        System.out.println(ageField.getText());
+    }
+
+    @FXML
+    void cancel(ActionEvent event) throws IOException 
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent root = loader.load();
+
+        MainController mainController = loader.getController();
+            
+        mainController.setAddMemberMain();
+        //Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+        
+        Scene scene = addMemberBtn.getScene();
+        Window window = scene.getWindow();
+        Stage stage = (Stage)window;
+
+        Scene mainScene = new Scene(root);
+        mainScene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
+        stage.setScene(mainScene);
+        stage.show();
     }
 
 }

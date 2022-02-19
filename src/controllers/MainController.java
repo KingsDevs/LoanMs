@@ -67,12 +67,20 @@ public class MainController
         mainPane.setCenter(setPane);
     }
 
+    public void setAddMemberMain() throws IOException
+    {
+        addMemberAction(new ActionEvent());
+    }
+
+
     private Pane getPane(String paneName) throws IOException
     {
         Pane viewPane = null;
 
         URL fileURL = getClass().getResource("/fxml/" + paneName +".fxml");
+        // FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + paneName +".fxml"));
         viewPane = FXMLLoader.load(fileURL);
+        
 
         return viewPane;
     }

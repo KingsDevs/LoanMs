@@ -13,17 +13,17 @@ public class CoopMember
     private String lastname;    
     private String position;    
     private String address;
-
-  
+    private int age; 
 
     
-    public CoopMember(String firstname, String middlename, String lastname, String position, String address)
+    public CoopMember(String firstname, String middlename, String lastname, String position, String address, int age)
     {
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
         this.position = position;
         this.address = address;
+        this.age = age;
     }
 
     public String getFirstname()
@@ -49,6 +49,11 @@ public class CoopMember
     public String getAddress()
     {
         return address;
+    }
+
+    public int getAge()
+    {
+        return age;
     }
 
     public static ResultSet getMembers() throws SQLException
@@ -87,8 +92,8 @@ public class CoopMember
 
     public void insertCoopMember()
     {
-        String sql = "INSERT INTO coop_members(firstname, middlename, lastname, address, position) "
-                    +"VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO coop_members(firstname, middlename, lastname, address, position, age) "
+                    +"VALUES(?,?,?,?,?,?)";
         
         try (PreparedStatement preparedStatement = Connect.getPreparedStatement(sql)) 
         {
@@ -97,6 +102,7 @@ public class CoopMember
             preparedStatement.setString(3, lastname);
             preparedStatement.setString(4, address);
             preparedStatement.setString(5, position);
+            preparedStatement.setInt(6, age);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
