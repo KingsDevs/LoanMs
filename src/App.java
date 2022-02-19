@@ -15,6 +15,7 @@ public class App extends Application{
         scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
         primaryStage.setTitle("Loan Management System");
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.show();
           
     }
