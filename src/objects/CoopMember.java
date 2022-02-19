@@ -2,10 +2,8 @@ package objects;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import connect.net.sqlite.Connect;
-import javafx.collections.ObservableList;
 
 public class CoopMember 
 {

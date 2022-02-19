@@ -17,7 +17,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import objects.CoopMember;
 
 public class AddMemberMainController implements Initializable
@@ -74,7 +76,6 @@ public class AddMemberMainController implements Initializable
             }
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -92,6 +93,13 @@ public class AddMemberMainController implements Initializable
         addMemberStage.alwaysOnTopProperty();
         addMemberStage.setScene(scene);
         addMemberStage.centerOnScreen();
+        
+        Scene currScene = addMemberBtn.getScene();
+        Stage currStage = (Stage)currScene.getWindow();
+
+        addMemberStage.initOwner(currStage);
+        addMemberStage.initModality(Modality.WINDOW_MODAL);
+        
         addMemberStage.show();
     }
 
