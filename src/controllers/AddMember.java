@@ -2,25 +2,31 @@ package controllers;
 
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import objects.CoopMember;
 import tools.FormValidation;
 
-public class AddMember
+public class AddMember implements Initializable
 {
 
     @FXML
@@ -72,6 +78,24 @@ public class AddMember
     //     this.tableView = tableView;
     // }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) 
+    {
+        ageField.textProperty().addListener(new ChangeListener<String>(){
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) 
+            {
+                if(!newValue.matches("\\d*"))
+                {
+                    ageField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+
+        });
+        
+    }
+
 
     @FXML
     void addMember(ActionEvent event) throws IOException 
@@ -84,6 +108,7 @@ public class AddMember
         String address = addressVield.getText();
         String position = positionField.getText();
         String sAge = ageField.getText();
+
 
         boolean isCleared = true;
 
@@ -129,6 +154,16 @@ public class AddMember
             ageValidation.setText(FormValidation.emptyField("Age"));
             isCleared = false;
         }
+        else
+        {
+            if(Integer.parseInt(sAge) < 18)
+            {
+                ageValidation.setText("You are too young!");
+                isCleared = false;
+            }
+            
+        }
+
 
         try {
             if (CoopMember.isExist(firstname, middlename, lastName)) 
@@ -166,22 +201,14 @@ public class AddMember
 
     }
 
+
     @FXML
-    void onlyNumeric(InputMethodEvent event) 
+    void handle(KeyEvent keyEvent) throws IOException 
     {
-        // ageField.textProperty().addListener(new ChangeListener<String>(){
-
-        //     @Override
-        //     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) 
-        //     {
-        //         if(!newValue.matches("\\d*"))
-        //         {
-        //             ageField.setText(newValue.replaceAll("[^\\d]", ""));
-        //         }
-        //     }
-
-        // });
-        System.out.println(ageField.getText());
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) 
+        {
+           addMember(new ActionEvent());
+        }
     }
 
     @FXML
@@ -204,5 +231,7 @@ public class AddMember
         stage.setScene(mainScene);
         stage.show();
     }
+
+    
 
 }
